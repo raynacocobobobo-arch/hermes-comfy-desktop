@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$ComfyRoot
+    [Alias('ComfyRoot')][string]$RequestedComfyRoot
 )
 
 $ErrorActionPreference = 'Stop'
@@ -129,5 +129,5 @@ function Get-HermesComfySystemInfo {
 }
 
 if ($MyInvocation.InvocationName -ne '.') {
-    Get-HermesComfySystemInfo -ComfyRoot $ComfyRoot | ConvertTo-Json -Depth 6
+    Get-HermesComfySystemInfo -ComfyRoot $RequestedComfyRoot | ConvertTo-Json -Depth 6
 }
