@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "policy_source": "raynacocobobobo-arch/skills-share/plugins/hermes-skills/skills/hermes-creative-digital-human",
+  "slots": {
+    "face": {
+      "hermes_role": "IDENTITY ONLY",
+      "priority": "CRITICAL",
+      "backend_strategy": "identity_conditioning",
+      "may_define_identity": true
+    },
+    "body": {
+      "hermes_role": "BODY ONLY",
+      "priority": "HIGH",
+      "backend_strategy": "reference_low_strength",
+      "may_define_identity": false
+    },
+    "wardrobe": {
+      "hermes_role": "WARDROBE ONLY",
+      "priority": "NORMAL",
+      "backend_strategy": "reference_appearance",
+      "may_define_identity": false
+    },
+    "pose": {
+      "hermes_role": "POSE ONLY",
+      "priority": "NORMAL",
+      "backend_strategy": "pose_controlnet",
+      "may_define_identity": false
+    },
+    "scene": {
+      "hermes_role": "SCENE ONLY",
+      "priority": "NORMAL",
+      "backend_strategy": "reference_scene",
+      "may_define_identity": false
+    }
+  }
+}
