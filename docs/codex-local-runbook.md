@@ -16,16 +16,34 @@ This runbook is for Codex running on the target Windows machine with Comfy Deskt
 
 ## A. Pull repository and read the contract
 
+Until PR #1 is merged, the executable repository-side tooling lives on `feat/implement-local-adapter`. Codex must use that branch for the local installation phase.
+
+Fresh clone:
+
 ```powershell
 git clone https://github.com/raynacocobobobo-arch/hermes-comfy-desktop.git
 cd hermes-comfy-desktop
+git fetch origin
+git switch feat/implement-local-adapter
+git pull --ff-only origin feat/implement-local-adapter
 ```
 
 If already cloned:
 
 ```powershell
-git pull --ff-only
+git fetch origin
+git switch feat/implement-local-adapter
+git pull --ff-only origin feat/implement-local-adapter
 ```
+
+Confirm before doing anything else:
+
+```powershell
+git branch --show-current
+git status --short
+```
+
+Expected branch: `feat/implement-local-adapter`. Stop if the working tree contains unrelated local changes that would be overwritten.
 
 Read, in order:
 
