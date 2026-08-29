@@ -15,6 +15,14 @@ function Write-NodeConfig {
     @{ schema_version=1; nodes=$Nodes } | ConvertTo-Json -Depth 6 | Set-Content $Path -Encoding utf8
 }
 
+function Assert-GitOrigin {
+    param([string]$Target, [string]$Expected)
+    $actual = (& $git.Source -C $Target remote get-url origin 2>&1 | Select-Object -First 1)
+    $exitCode = $LASTEXITCODE
+    if ($exitCode -ne 0) { throw "test fixture could not read git origin at $Target: $actual" }
+    if ([string]$actual -ne $Expected) { throw "test fixture git origin mismatch. Expected='$Expected' Actual='$actual'" }
+}
+
 # Missing git fails before any clone.
 $root = New-FakeComfyRoot
 try {
@@ -52,6 +60,7 @@ try {
     New-Item -ItemType Directory -Path $target -Force | Out-Null
     & $git.Source -C $target init | Out-Null
     & $git.Source -C $target remote add origin 'https://example.invalid/other.git'
+    Assert-GitOrigin -Target $target -Expected 'https://example.invalid/other.git'
     $out = & pwsh -NoProfile -File $bootstrap -ComfyRoot $root -NodeListPath $cfg 2>&1
     if ($LASTEXITCODE -eq 0) { throw 'mismatched git origin should fail' }
 } finally { Remove-Item $root -Recurse -Force }
@@ -66,6 +75,7 @@ try {
     New-Item -ItemType Directory -Path $target -Force | Out-Null
     & $git.Source -C $target init | Out-Null
     & $git.Source -C $target remote add origin $remote
+    Assert-GitOrigin -Target $target -Expected $remote
     Set-Content (Join-Path $target 'keep-me.txt') 'preserve' -Encoding utf8
     $out = & pwsh -NoProfile -File $bootstrap -ComfyRoot $root -NodeListPath $cfg 2>&1
     if ($LASTEXITCODE -ne 0) { throw "matching existing repo should pass: $($out -join ' | ')" }
