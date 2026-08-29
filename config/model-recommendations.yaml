@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "models": [
+    {
+      "id": "sdxl_checkpoint",
+      "required": true,
+      "purpose": "realistic SDXL base checkpoint",
+      "expected_folder": "models/checkpoints",
+      "selection_rule": "Choose one locally available, license-compatible realistic SDXL checkpoint that loads successfully in the installed Comfy Desktop runtime. Do not treat the checkpoint as identity authority.",
+      "resolved_filename": null
+    },
+    {
+      "id": "identity_model",
+      "required": true,
+      "purpose": "model files required by the verified identity-aware conditioning package",
+      "expected_folder": null,
+      "selection_rule": "Resolve filename and folder only from the verified identity package documentation for the target Comfy Desktop version.",
+      "resolved_filename": null
+    },
+    {
+      "id": "clip_vision_adapter",
+      "required": true,
+      "purpose": "CLIP Vision / reference-adapter weights for non-identity reference conditioning",
+      "expected_folder": null,
+      "selection_rule": "Resolve the exact CLIP Vision and adapter files from the verified reference-adapter package documentation. Keep body, wardrobe, and scene on non-identity paths.",
+      "resolved_filename": null
+    },
+    {
+      "id": "pose_controlnet_sdxl",
+      "required": true,
+      "purpose": "SDXL-compatible pose ControlNet",
+      "expected_folder": "models/controlnet",
+      "selection_rule": "Select an SDXL-compatible OpenPose/DWPose ControlNet verified to load in the target runtime.",
+      "resolved_filename": null
+    },
+    {
+      "id": "pose_preprocessor",
+      "required": true,
+      "purpose": "pose-preprocessor model files if required by the selected DWPose/OpenPose node package",
+      "expected_folder": null,
+      "selection_rule": "Use the selected pose-preprocessor package's documented cache/model location; do not invent a folder if the package manages its own downloads.",
+      "resolved_filename": null
+    }
+  ],
+  "download_policy": "This repository never stores model binaries. Codex must show the required filename, source, approximate size when known, and destination before any multi-gigabyte download."
+}
