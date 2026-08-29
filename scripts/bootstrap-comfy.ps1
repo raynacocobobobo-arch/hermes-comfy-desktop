@@ -64,9 +64,12 @@ function Invoke-HermesComfyBootstrap {
             if (-not (Test-Path (Join-Path $target '.git') -PathType Container)) {
                 throw "Existing target is not a git repository: $target"
             }
-            $origin = (& $git.Source -C $target remote get-url origin 2>$null | Select-Object -First 1)
-            if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace([string]$origin)) {
-                throw "Could not read git origin for existing node: $target"
+
+            $originOutput = @(& $git.Source -C $target remote get-url origin 2>$null)
+            $originExitCode = $LASTEXITCODE
+            $origin = [string]($originOutput | Select-Object -First 1)
+            if ($originExitCode -ne 0 -or [string]::IsNullOrWhiteSpace($origin)) {
+                throw "Could not read git origin for existing node: $target (exit=$originExitCode origin='$origin')"
             }
             if ((Normalize-HermesGitRemote -Remote $origin) -ne (Normalize-HermesGitRemote -Remote $remote)) {
                 throw "Existing node origin mismatch for '$($node.id)'. Existing='$origin' Expected='$remote'"
