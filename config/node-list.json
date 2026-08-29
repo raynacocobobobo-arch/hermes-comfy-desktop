@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    {
+      "id": "identity",
+      "required_for": ["single", "triple"],
+      "purpose": "identity-aware SDXL conditioning",
+      "repository_candidates": [
+        "https://github.com/cubiq/ComfyUI_InstantID"
+      ],
+      "resolved_repository": null,
+      "folder_name": null
+    },
+    {
+      "id": "reference_adapter",
+      "required_for": ["single", "triple"],
+      "purpose": "non-identity body/wardrobe/scene reference conditioning",
+      "repository_candidates": [
+        "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
+      ],
+      "resolved_repository": null,
+      "folder_name": null
+    },
+    {
+      "id": "pose_preprocessor",
+      "required_for": ["single", "triple"],
+      "purpose": "DWPose/OpenPose extraction",
+      "repository_candidates": [
+        "https://github.com/Fannovel16/comfyui_controlnet_aux"
+      ],
+      "resolved_repository": null,
+      "folder_name": null
+    },
+    {
+      "id": "face_detail",
+      "required_for": [],
+      "purpose": "optional localized face-detail pass",
+      "repository_candidates": [
+        "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+      ],
+      "resolved_repository": null,
+      "folder_name": null
+    }
+  ],
+  "resolution_policy": "Candidates are hints only. Codex must verify current maintenance status, Comfy Desktop compatibility, installation instructions, and exact node classes on the target machine before setting resolved_repository and folder_name."
+}
