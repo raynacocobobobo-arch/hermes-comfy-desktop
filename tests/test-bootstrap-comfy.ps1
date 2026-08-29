@@ -19,7 +19,7 @@ function Assert-GitOrigin {
     param([string]$Target, [string]$Expected)
     $actual = (& $git.Source -C $Target remote get-url origin 2>&1 | Select-Object -First 1)
     $exitCode = $LASTEXITCODE
-    if ($exitCode -ne 0) { throw "test fixture could not read git origin at $Target: $actual" }
+    if ($exitCode -ne 0) { throw "test fixture could not read git origin at ${Target}: $actual" }
     if ([string]$actual -ne $Expected) { throw "test fixture git origin mismatch. Expected='$Expected' Actual='$actual'" }
 }
 
