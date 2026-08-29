@@ -91,7 +91,7 @@ function Invoke-HermesComfyBootstrap {
     }
 
     Write-Host 'NOTE model weights are never downloaded by bootstrap-comfy.ps1'
-    return @($results)
+    return $results
 }
 
 if ($MyInvocation.InvocationName -ne '.') {
